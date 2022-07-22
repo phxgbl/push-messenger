@@ -13,7 +13,8 @@ const customerSchema=mongoose.Schema({
     mobile:{
         type:String,
         required:[true,'Customer mobile is required']
-    }
+    },
+    contacted:Number
 })
 
 const Customer = mongoose.model('Customer',customerSchema)

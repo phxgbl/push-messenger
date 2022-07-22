@@ -2,6 +2,13 @@
     "settings":{
         "db":{
             "url":"mongodb://192.168.5.56:27017/magellan-push"
+        },
+        "file":{
+           "uploadLocation":"D:/push/uploads/"
+        },
+        "excel":{
+            "fields":["fullname","mobile","email"],
+            "sheetIndex":0
         }
     }
 }

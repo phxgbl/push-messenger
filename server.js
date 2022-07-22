@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const config = require('config');
-
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
 
 const settings = config.get('settings');
 
@@ -23,6 +24,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 });
+
 
 
 app.use(session({
@@ -41,6 +43,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/views'));
+
 
 const index = require('./routes/index');
 app.use('/', index);
