@@ -14,13 +14,15 @@
             <th>FullName</th>
             <th>Email</th>
             <th>Mobile</th>
+            <th>Contact</th>
         </tr>
-
+        <% if(customers.length>0)%>
         <% customers.forEach(function(customer){ %>
             <tr>
                 <td><%=customer.fullname%></td>
                 <td><%=customer.email%></td>
                 <td><%=customer.mobile%></td>
+                <td><%=customer.contacted%></td>
                 <td><button><a href=<%="https://wa.me/"+customer.mobile%>>Connect</a></button></td>
             </tr>
         <% }); %>

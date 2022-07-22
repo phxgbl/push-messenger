@@ -2,7 +2,7 @@ const CustomerModel = require('../models/customer');
 const reader = require('xlsx');
 const config = require('config')
 const settings = config.get('settings');
-
+const {IsEmptyObject,IsEmptyArray}=require('./common/helpers')
 const getAllCustomers = async () => {
     try {
         const customerData = await CustomerModel.find();
@@ -56,21 +56,32 @@ const _cleanTransformedData = async (data) => {
         ){continue;}
         if(doc.fullname===undefined||doc.mobile===undefined||doc.email===undefined){continue;}
         const dbDoc = await CustomerModel.findOne({ mobile: doc.mobile })
-        console.log(IsEmptyObject(dbDoc))
-        console.log(IsValidString(doc.fullname))
-        if (IsEmptyObject(dbDoc)){ cleanedData.push(doc); }
+        if (IsEmptyObject(dbDoc)){
+            doc['contacted']=0
+            cleanedData.push(doc);
+        }
     }
     return cleanedData;
 }
 
-//Move to helper
-const IsEmptyObject = obj => !(typeof (obj) === 'object' && !(obj instanceof Array) && obj !== null && Object.keys(obj).length > 0);
-const IsEmptyArray = arr => !(IsArray(arr) && arr.length > 0);
-const IsValidString = str => (typeof (str) === 'string' && str.trim().length > 0);
+const incrementContact = async (userId)=>{
+    try{
+        const dbDoc = await CustomerModel.findById(userId)
+        let contacted = dbDoc.contacted;
+        await CustomerModel.findByIdAndUpdate(userId,{contacted:contacted+1});
+        return true;
+    }catch(err){
+        console.log(err)
+        return false;
+    }
+     
+
+}
 
 const customerController = {
     getAllCustomers,
-    uploadUserData
+    uploadUserData,
+    incrementContact
 }
 
 module.exports = customerController;

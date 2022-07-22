@@ -31,5 +31,15 @@ customerRouter.get('/upload', (req, res, next) => {
     return res.render('customerUpload.ejs');
 })
 
+//Increment contact route
+customerRouter.get('/incrementContact/:userId', (req, res, next) => {
+    const hasIncrementedContact=customerController.incrementContact(req.params.userId);
+    if(!hasIncrementedContact){
+        //change wih error page
+        return res.redirect('/customers');    
+    }
+    return res.redirect('/customers');
+})
+
 module.exports = customerRouter;
 
