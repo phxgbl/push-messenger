@@ -1,7 +1,7 @@
 {
     "settings":{
         "db":{
-            "url":"mongodb://192.168.5.56:27017/magellan-push"
+            "url":"mongodb+srv://messenger:TVJYqQ11phy4i2IB@cluster0.5qok8.mongodb.net/?retryWrites=true&w=majority"
         },
         "file":{
            "uploadLocation":"D:/push/uploads/"
