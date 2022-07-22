@@ -3,7 +3,16 @@ const router = express.Router();
 const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
-	return res.render('index.ejs');
+//	return res.render('index.ejs');
+
+User.findOne({ unique_id: req.session.userId }, (err, data) => {
+	if (!data) {
+		res.redirect('/login');
+	} else {
+		return res.render('data.ejs', { "name": data.username, "email": data.email });
+	}
+});
+
 });
 
 
@@ -58,6 +67,10 @@ router.get('/login', (req, res, next) => {
 	return res.render('login.ejs');
 });
 
+router.get('/register', (req, res, next) => {
+	return res.render('register.ejs');
+});
+
 router.post('/login', (req, res, next) => {
 	User.findOne({ email: req.body.email }, (err, data) => {
 		if (data) {
@@ -79,7 +92,7 @@ router.get('/profile', (req, res, next) => {
 		if (!data) {
 			res.redirect('/');
 		} else {
-			return res.render('data.ejs', { "name": data.username, "email": data.email });
+			return res.render('user-profile.ejs', { "name": data.username, "email": data.email });
 		}
 	});
 });

@@ -18,12 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FSojitra/Node.js-Register-Login-App.git"
+    "url": "git+https://github.com/phxgbl/push-messenger.git"
   },
-  "author": "foram sojitra",
+  "author": "Aneer,glen,amalesh",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FSojitra/Node.js-Register-Login-App/issues"
-  },
-  "homepage": "https://github.com/FSojitra/Node.js-Register-Login-App#readme"
+  "homepage": "https://github.com/phxgbl/push-messenger#readme"
 }
