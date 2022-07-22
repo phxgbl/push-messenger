@@ -6,8 +6,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const config = require('config');
 
-const MongoDBURI = process.env.MONGO_URI || 'mongodb://192.168.5.56:27017/magellan-push';
+
+const settings = config.get('settings');
+
+
+const MongoDBURI = settings.db.url;
 
 mongoose.connect(MongoDBURI, {
   useUnifiedTopology: true,
@@ -18,6 +23,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
 });
+
 
 app.use(session({
   secret: 'work hard',
@@ -38,6 +44,10 @@ app.use(express.static(__dirname + '/views'));
 
 const index = require('./routes/index');
 app.use('/', index);
+
+
+const customerRoute = require('./routes/customerRoute');
+app.use('/customers', customerRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
