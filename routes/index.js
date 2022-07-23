@@ -110,32 +110,32 @@ router.get('/logout', (req, res, next) => {
 	}
 });
 
-router.get('/forgetpass', (req, res, next) => {
-	res.render("forget.ejs");
-});
+// router.get('/forgetpass', (req, res, next) => {
+// 	res.render("forget.ejs");
+// });
 
-router.post('/forgetpass', (req, res, next) => {
-	User.findOne({ email: req.body.email }, (err, data) => {
-		if (!data) {
-			res.send({ "Success": "This Email Is not regestered!" });
-		} else {
-			if (req.body.password == req.body.passwordConf) {
-				data.password = req.body.password;
-				data.passwordConf = req.body.passwordConf;
+// router.post('/forgetpass', (req, res, next) => {
+// 	User.findOne({ email: req.body.email }, (err, data) => {
+// 		if (!data) {
+// 			res.send({ "Success": "This Email Is not regestered!" });
+// 		} else {
+// 			if (req.body.password == req.body.passwordConf) {
+// 				data.password = req.body.password;
+// 				data.passwordConf = req.body.passwordConf;
 
-				data.save((err, Person) => {
-					if (err)
-						console.log(err);
-					else
-						console.log('Success');
-					res.send({ "Success": "Password changed!" });
-				});
-			} else {
-				res.send({ "Success": "Password does not matched! Both Password should be same." });
-			}
-		}
-	});
+// 				data.save((err, Person) => {
+// 					if (err)
+// 						console.log(err);
+// 					else
+// 						console.log('Success');
+// 					res.send({ "Success": "Password changed!" });
+// 				});
+// 			} else {
+// 				res.send({ "Success": "Password does not matched! Both Password should be same." });
+// 			}
+// 		}
+// 	});
 
-});
+// });
 
 module.exports = router;
