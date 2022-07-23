@@ -11,8 +11,8 @@ const getMessageById = async(messageId)=>{
 }
 
 const createMessage = async (message)=>{
-    const message = await MessageModel.create(message);
-    return message;
+    const newMessage = await MessageModel.create(message);
+    return newMessage;
 }
 
 const updateMessage = async (messageId,updatedMessage)=>{
