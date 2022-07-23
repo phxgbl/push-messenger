@@ -1,78 +1,78 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const Staff = require('../models/staff');
 
 router.get('/', (req, res, next) => {
 //	return res.render('index.ejs');
 
-User.findOne({ unique_id: req.session.userId }, (err, data) => {
+Staff.findOne({ unique_id: req.session.userId }, (err, data) => {
 	if (!data) {
 		res.redirect('/login');
 	} else {
-		return res.render('data.ejs', { "name": data.username, "email": data.email });
+		return res.render('data.ejs', { "name": data.fullname, "email": data.email });
 	}
 });
 
 });
 
+//register
+// router.post('/', (req, res, next) => {
+// 	let personInfo = req.body;
 
-router.post('/', (req, res, next) => {
-	let personInfo = req.body;
+// 	if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
+// 		res.send();
+// 	} else {
+// 		if (personInfo.password == personInfo.passwordConf) {
 
-	if (!personInfo.email || !personInfo.username || !personInfo.password || !personInfo.passwordConf) {
-		res.send();
-	} else {
-		if (personInfo.password == personInfo.passwordConf) {
+// 			Staff.findOne({ email: personInfo.email }, (err, data) => {
+// 				if (!data) {
+// 					let c;
+// 					Staff.findOne({}, (err, data) => {
 
-			User.findOne({ email: personInfo.email }, (err, data) => {
-				if (!data) {
-					let c;
-					User.findOne({}, (err, data) => {
+// 						if (data) {
+// 							c = data.unique_id + 1;
+// 						} else {
+// 							c = 1;
+// 						}
 
-						if (data) {
-							c = data.unique_id + 1;
-						} else {
-							c = 1;
-						}
+// 						let newPerson = new User({
+// 							unique_id: c,
+// 							email: personInfo.email,
+// 							username: personInfo.username,
+// 							password: personInfo.password,
+// 							passwordConf: personInfo.passwordConf
+// 						});
 
-						let newPerson = new User({
-							unique_id: c,
-							email: personInfo.email,
-							username: personInfo.username,
-							password: personInfo.password,
-							passwordConf: personInfo.passwordConf
-						});
+// 						newPerson.save((err, Person) => {
+// 							if (err)
+// 								console.log(err);
+// 							else
+// 								console.log('Success');
+// 						});
 
-						newPerson.save((err, Person) => {
-							if (err)
-								console.log(err);
-							else
-								console.log('Success');
-						});
+// 					}).sort({ _id: -1 }).limit(1);
+// 					res.send({ "Success": "You are regestered,You can login now." });
+// 				} else {
+// 					res.send({ "Success": "Email is already used." });
+// 				}
 
-					}).sort({ _id: -1 }).limit(1);
-					res.send({ "Success": "You are regestered,You can login now." });
-				} else {
-					res.send({ "Success": "Email is already used." });
-				}
-
-			});
-		} else {
-			res.send({ "Success": "password is not matched" });
-		}
-	}
-});
+// 			});
+// 		} else {
+// 			res.send({ "Success": "password is not matched" });
+// 		}
+// 	}
+// });
 
 router.get('/login', (req, res, next) => {
 	return res.render('login.ejs');
 });
 
-router.get('/register', (req, res, next) => {
-	return res.render('register.ejs');
-});
+// router.get('/register', (req, res, next) => {
+// 	return res.render('register.ejs');
+// });
 
 router.post('/login', (req, res, next) => {
-	User.findOne({ email: req.body.email }, (err, data) => {
+	Staff.findOne({ email: req.body.email }, (err, data) => {
 		if (data) {
 
 			if (data.password == req.body.password) {
@@ -88,11 +88,11 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/profile', (req, res, next) => {
-	User.findOne({ unique_id: req.session.userId }, (err, data) => {
+	Staff.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
 			res.redirect('/');
 		} else {
-			return res.render('user-profile.ejs', { "name": data.username, "email": data.email });
+			return res.render('user-profile.ejs', { "name": data.fullname, "email": data.email });
 		}
 	});
 });
