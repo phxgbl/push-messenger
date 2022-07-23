@@ -6,8 +6,15 @@ const config = require('config');
 const settings = config.get('settings');
 
 staffRouter.get('/', async (req, res, next) => {
+	const staff = await staffController.getStaffById(req.session.userId);
+	if (!staff) {
+		res.redirect('/login');
+        return;
+	} 
     const staffs = await staffController.getAllstaffs();
     return res.render('staffs.ejs', { staffs: staffs });
+
+
 });
 
 staffRouter.post('/uploadFile',  (req, res, next) => {

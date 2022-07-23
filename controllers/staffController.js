@@ -2,7 +2,7 @@ const StaffModel = require('../models/staff');
 const reader = require('xlsx');
 const config = require('config')
 const settings = config.get('settings');
-const helpers=require('./common/helpers')
+const helpers = require('./common/helpers')
 const getAllstaffs = async () => {
     try {
         const staffData = await StaffModel.find();
@@ -26,8 +26,8 @@ const uploadStaffData = async (excelFilePath) => {
             })
         }
         const tranformedExcel = helpers.transformExcelDataToOnlyRequiredFields(data, settings.excel.staffFields);
-        const cleanedData = await helpers.cleanTransformedData(tranformedExcel,StaffModel);
-        if(!helpers.IsEmptyArray(cleanedData)){
+        const cleanedData = await helpers.cleanTransformedData(tranformedExcel, StaffModel);
+        if (!helpers.IsEmptyArray(cleanedData)) {
             await StaffModel.insertMany(cleanedData);
         }
         return true;
@@ -39,24 +39,46 @@ const uploadStaffData = async (excelFilePath) => {
 }
 
 
-const incrementContact = async (userId)=>{
-    try{
-        const dbDoc = await StaffModel.findById(userId)
-        let contacted = dbDoc.contacted;
-        await StaffModel.findByIdAndUpdate(userId,{contacted:contacted+1});
-        return true;
-    }catch(err){
+
+const getStaffById = async (userId) => {
+    try {
+        return await StaffModel.findById(userId)
+    } catch (err) {
         console.log(err)
         return false;
     }
-     
+}
+
+const getStaffByEmail = async (email) => {
+    try {
+        return await StaffModel.findOne({ email: email })
+    } catch (err) {
+        console.log(err)
+        return false;
+    }
+}
+
+
+const incrementContact = async (userId) => {
+    try {
+        const dbDoc = await StaffModel.findById(userId)
+        let contacted = dbDoc.contacted;
+        await StaffModel.findByIdAndUpdate(userId, { contacted: contacted + 1 });
+        return true;
+    } catch (err) {
+        console.log(err)
+        return false;
+    }
+
 
 }
 
 const customerController = {
     getAllstaffs,
     uploadStaffData,
-    incrementContact
+    incrementContact,
+    getStaffById,
+    getStaffByEmail
 }
 
 module.exports = customerController;

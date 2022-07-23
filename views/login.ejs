@@ -24,13 +24,10 @@
 						$('#form')[0].reset();
 
 						document.getElementById("check").innerHTML = response.Success;
-						//ADD THIS CODE
-						setTimeout(() => {
-							document.getElementById("check").innerHTML = "";
-						}, 3000);
 						if (response.Success == "Success!") {
-							document.getElementById("aa").click();
+							location.reload();
 						};
+
 					},
 					error: () => {
 					}
@@ -55,12 +52,6 @@
 		</div>
 		<div class="mssg bg-danger">
 			<span id="check"></span>
-		</div>
-		<div id="LangTable"><a href="/profile" id="aa"></a>
-		</div>
-		<div><span>Do you forgot password? </span><a href="/forgetpass">click here</a>
-		</div>
-		<div id="LangTable"><span>Do you want to register a new Account? </span><a href="/">click here</a>
 		</div>
 	</div>
 </body>
