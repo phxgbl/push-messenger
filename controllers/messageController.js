@@ -23,7 +23,17 @@ const updateMessage = async (messageId,updatedMessage)=>{
     return message;
 }
 
-const deleteBook = async(messageId)=>{
+const deleteMessage = async(messageId)=>{
     await MessageModel.findByIdAndDelete(messageId);
     return {};
 }
+
+const messageController = {
+    createMessage,
+    updateMessage,
+    deleteMessage,
+    getAllMessages,
+    getMessageById
+}
+
+module.exports = messageController;
