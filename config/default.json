@@ -4,10 +4,11 @@
             "url":"mongodb+srv://messenger:TVJYqQ11phy4i2IB@cluster0.5qok8.mongodb.net/?retryWrites=true&w=majority"
         },
         "file":{
-           "uploadLocation":"D:/push/uploads/"
+           "uploadLocation":"/home/glen/Projects/Node-projects/push/uploads/"
         },
         "excel":{
-            "fields":["fullname","mobile","email"],
+            "customerFields":["fullname","mobile","email"],
+            "staffFields":["fullname","mobile","email","password","login_enabled","role"],
             "sheetIndex":0
         }
     }

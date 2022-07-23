@@ -52,6 +52,9 @@ app.use('/', index);
 const customerRoute = require('./routes/customerRoute');
 app.use('/customers', customerRoute);
 
+const staffRoute = require('./routes/staffRoute');
+app.use('/staffs', staffRoute);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('File Not Found');
