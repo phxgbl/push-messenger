@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="./css/main.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="margin-left: 34px" href="#">PUSH MESSENGER</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navHeaderCollapse"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#messageSection">Add Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#userSection">Add Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"> SignOut </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <section class="vh-100 gradient-custom">
+    <div id="messageSection">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card bg-dark text-white shadow-lg" style="border-radius: 1rem;">
+
+              <div class="card-body p-5 ">
+
+                <div class="mb-md-5 mt-md-4 pb-5">
+
+                  <h2 class="fw-bold mb-2 text-uppercase text-center">MESSAGES</h2>
+                  <p class="text-white-50 mb-5 text-center">Please enter your messages</p>
+                  
+                  <form class="needs-validation">
+                    <div class="form-outline form-white mb-4">
+                      <textarea id="messageBox1" class="form-control form-control-lg" rows="3"
+                        placeholder="Type message here" /></textarea>
+
+                    </div>
+                    <button class="btn btn-outline-light btn-sm float-right px-5" type="submit">Add Message</button>
+
+                  </form>
+                  <br>
+                  <form class="needs-validation">
+                    <div class="form-outline form-white mb-4">
+                      <textarea id="messageBox2" class="form-control form-control-lg" rows="3"
+                        placeholder="Type message here" /></textarea>
+
+                    </div>
+                    <button class="btn btn-outline-light btn-sm float-right px-5" type="submit">Add Message</button>
+                  </form>
+                  <br>
+                  <form class="needs-validation">
+                    <div class="form-outline form-white mb-4">
+                      <textarea id="messageBox3" class="form-control form-control-lg" rows="3"
+                        placeholder="Type message here" /></textarea>
+
+                    </div>
+                    <button class="btn btn-outline-light btn-sm float-right px-5" type="submit">Add Message</button>
+                  </form>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    <section class="vh-100 gradient-custom">
+    <div id="userSection">      
+      <div id="messageSection">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white shadow-lg" style="border-radius: 1rem;">
+  
+                <div class="card-body p-5 ">
+  
+                  <div class="mb-md-5 mt-md-4 pb-5">
+  
+                    <h2 class="fw-bold mb-2 text-uppercase text-center">ADD USERS</h2>
+                    <p class="text-white-50 mb-5 text-center">Please upload users</p>
+                    <form action="/customers/uploadFile" method="POST" enctype="multipart/form-data" >
+                      <div class="form-outline form-white mb-4">
+                      <input type="file" class="form-control form-control-lg" name="data">
+                      
+                    </div>
+                    <button class="btn btn-outline-light btn-sm float-right px-5" type="submit">Add File</button>
+                  </form>
+                    <br>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+
+</html>

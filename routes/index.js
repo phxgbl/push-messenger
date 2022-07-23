@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const { route } = require('./customerRoute');
+const customerRoute = require('./customerRoute')
 
 router.get('/', (req, res, next) => {
 //	return res.render('index.ejs');
@@ -89,11 +91,12 @@ router.post('/login', (req, res, next) => {
 
 router.get('/profile', (req, res, next) => {
 	User.findOne({ unique_id: req.session.userId }, (err, data) => {
-		if (!data) {
-			res.redirect('/');
-		} else {
-			return res.render('user-profile.ejs', { "name": data.username, "email": data.email });
-		}
+		return res.render('user-profile.ej')
+		// if (!data) {
+		// 	res.redirect('/');
+		// } else {
+		// 	return res.render('user-profile.ejs', { "name": data.username, "email": data.email });
+		// }
 	});
 });
 
@@ -137,5 +140,9 @@ router.post('/forgetpass', (req, res, next) => {
 	});
 
 });
+router.get('/admin',(req, res,next)=>{
+	res.render("admin.ejs")
+})
+
 
 module.exports = router;
