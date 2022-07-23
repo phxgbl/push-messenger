@@ -1,19 +1,19 @@
-const CustomerModel = require('../models/customer');
+const StaffModel = require('../models/staff');
 const reader = require('xlsx');
 const config = require('config')
 const settings = config.get('settings');
 const helpers=require('./common/helpers')
-const getAllCustomers = async () => {
+const getAllstaffs = async () => {
     try {
-        const customerData = await CustomerModel.find();
-        return customerData
+        const staffData = await StaffModel.find();
+        return staffData;
     } catch (err) {
         console.log(err);
         return {};
     }
 }
 
-const uploadUserData = async (excelFilePath) => {
+const uploadStaffData = async (excelFilePath) => {
     try {
         const excelFile = reader.readFile(excelFilePath)
         let data = []
@@ -25,10 +25,10 @@ const uploadUserData = async (excelFilePath) => {
                 data.push(res)
             })
         }
-        const tranformedExcel = helpers.transformExcelDataToOnlyRequiredFields(data, settings.excel.customerFields);
-        const cleanedData = await helpers.cleanTransformedData(tranformedExcel,CustomerModel);
-        if(!IsEmptyArray(cleanedData)){
-            await CustomerModel.insertMany(cleanedData);
+        const tranformedExcel = helpers.transformExcelDataToOnlyRequiredFields(data, settings.excel.staffFields);
+        const cleanedData = await helpers.cleanTransformedData(tranformedExcel,StaffModel);
+        if(!helpers.IsEmptyArray(cleanedData)){
+            await StaffModel.insertMany(cleanedData);
         }
         return true;
     } catch (error) {
@@ -38,11 +38,12 @@ const uploadUserData = async (excelFilePath) => {
 
 }
 
+
 const incrementContact = async (userId)=>{
     try{
-        const dbDoc = await CustomerModel.findById(userId)
+        const dbDoc = await StaffModel.findById(userId)
         let contacted = dbDoc.contacted;
-        await CustomerModel.findByIdAndUpdate(userId,{contacted:contacted+1});
+        await StaffModel.findByIdAndUpdate(userId,{contacted:contacted+1});
         return true;
     }catch(err){
         console.log(err)
@@ -53,8 +54,8 @@ const incrementContact = async (userId)=>{
 }
 
 const customerController = {
-    getAllCustomers,
-    uploadUserData,
+    getAllstaffs,
+    uploadStaffData,
     incrementContact
 }
 

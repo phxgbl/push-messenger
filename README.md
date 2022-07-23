@@ -1,4 +1,4 @@
-# Node.js-Register-Login-App
+# staff push message app
 
 This is a user login and registration app using Node.js, Express, Mongoose, EJS and express-sessions.
 
@@ -23,9 +23,3 @@ nodemon server.js
 Code is Running on 
 + http://localhost:3000/
 
-### To checkout live
-<a href="https://nodejs-register-login-app.herokuapp.com" target="_blank">https://nodejs-register-login-app.herokuapp.com</a>
-
-### Do not forget to leave a star! :hugs:
-
-:heart_eyes: Thanks
